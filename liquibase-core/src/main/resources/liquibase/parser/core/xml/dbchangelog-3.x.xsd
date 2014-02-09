@@ -117,7 +117,7 @@
 									<xsd:element ref="includeAll" minOccurs="0" maxOccurs="unbounded" />
 								</xsd:choice>
 							</xsd:sequence>
-							<xsd:attribute name="context" type="xsd:string" />
+							<xsd:attribute name="context" type="xsd:string" use="required"/>
 						</xsd:complexType>
 					</xsd:element>
 				</xsd:choice>

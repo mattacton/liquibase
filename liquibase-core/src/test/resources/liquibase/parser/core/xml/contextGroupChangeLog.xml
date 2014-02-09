@@ -44,5 +44,14 @@
 			</createTable>
 		</changeSet>
 	</contextGroup>
+	
+	<changeSet id="4" author="jim">
+		<createTable tableName="account">
+			<column name="id" type="int">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="type" type="varchar(75)" />
+		</createTable>
+	</changeSet>
 
 </databaseChangeLog>
