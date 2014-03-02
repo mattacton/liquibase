@@ -133,11 +133,11 @@ public class XMLChangeLogSAXParserTest {
         assertEquals("column", exChg.getColumnName());
 
     }
-    
+
     @Test
     public void contextGroupChangeLog() throws Exception {
     	DatabaseChangeLog changeLog = new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/contextGroupChangeLog.xml", new ChangeLogParameters(), new JUnitResourceAccessor());
-    	
+
     	//Changeset 1
     	ChangeSet changeSet = changeLog.getChangeSets().get(0);
     	Contexts contexts = changeSet.getContexts();
@@ -145,7 +145,7 @@ public class XMLChangeLogSAXParserTest {
     	for (String context : contexts) {
     		assertTrue("Expected either context1 or context3", "context1".equals(context) || "context3".equals(context));
     	}
-    	
+
     	//Changeset 2
     	changeSet = changeLog.getChangeSets().get(1);
     	contexts = changeSet.getContexts();
@@ -153,7 +153,7 @@ public class XMLChangeLogSAXParserTest {
     	for (String context : contexts) {
     		assertTrue("Expected either context1 or context3", "context1".equals(context) || "context3".equals(context));
     	}
-    	
+
     	//Changeset 3 different contextGroup and nested context
     	changeSet = changeLog.getChangeSets().get(2);
     	contexts = changeSet.getContexts();
@@ -161,7 +161,7 @@ public class XMLChangeLogSAXParserTest {
     	for (String context : contexts) {
     		assertTrue("Expected context2 or context4", "context2".equals(context) || "context4".equals(context));
     	}
-    	
+
     	// change 4
         changeSet = changeLog.getChangeSets().get(3);
         assertTrue("Expected no contexts", changeSet.getContexts().isEmpty());
@@ -412,11 +412,11 @@ public class XMLChangeLogSAXParserTest {
 	@Test
 	public void addColumnAfter() throws Exception {
         DatabaseChangeLog changeLog = new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnAfterChangeLog.xml", new ChangeLogParameters(), new JUnitResourceAccessor());
-        
+
         // change 0
         ChangeSet changeSet = changeLog.getChangeSets().get(0);
         assertEquals("1", changeSet.getId());
-        
+
         // change 1
         changeSet = changeLog.getChangeSets().get(1);
         assertEquals("2", changeSet.getId());
@@ -429,21 +429,21 @@ public class XMLChangeLogSAXParserTest {
 
         List<AddColumnConfig> columns = ((AddColumnChange) change).getColumns();
         assertEquals(1, columns.size());
-        
+
         AddColumnConfig columnConfig = columns.get(0);
         assertEquals("middlename", columnConfig.getName());
-        
+
         assertEquals("firstname", columnConfig.getAfterColumn());
 	}
 
 	@Test
 	public void addColumnBefore() throws Exception {
         DatabaseChangeLog changeLog = new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnBeforeChangeLog.xml", new ChangeLogParameters(), new JUnitResourceAccessor());
-        
+
         // change 0
         ChangeSet changeSet = changeLog.getChangeSets().get(0);
         assertEquals("1", changeSet.getId());
-        
+
         // change 1
         changeSet = changeLog.getChangeSets().get(1);
         assertEquals("2", changeSet.getId());
@@ -456,22 +456,22 @@ public class XMLChangeLogSAXParserTest {
 
         List<AddColumnConfig> columns = ((AddColumnChange) change).getColumns();
         assertEquals(1, columns.size());
-        
+
         AddColumnConfig columnConfig = columns.get(0);
         assertEquals("middlename", columnConfig.getName());
-        
+
         assertEquals("lastname", columnConfig.getBeforeColumn());
 	}
 
 	@Test
 	public void addColumnFirst() throws Exception {
         DatabaseChangeLog changeLog = new XMLChangeLogSAXParser().parse("liquibase/parser/core/xml/columnFirstChangeLog.xml", new ChangeLogParameters(), new JUnitResourceAccessor());
-        
+
         ChangeSet changeSet = changeLog.getChangeSets().get(1);
         List<Change> changes = changeSet.getChanges();
         Change change = changes.get(0);
         List<AddColumnConfig> columns = ((AddColumnChange) change).getColumns();
-        
+
         AddColumnConfig columnConfig = columns.get(0);
         assertEquals("middlename", columnConfig.getName());
 
